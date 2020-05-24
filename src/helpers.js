@@ -28,6 +28,10 @@ function localtime(utc) {
 }
 
 function getTimestamp(date, time) {
+  if (!date || !time) {
+    return "";
+  }
+
   const d = moment(date).format("YYYY-MM-DD");
   const dt = moment( d + " " + time );
   return dt.format("YYYY-MM-DD HH:mm");

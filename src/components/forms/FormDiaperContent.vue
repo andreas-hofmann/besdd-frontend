@@ -5,7 +5,7 @@
     <b-container v-if="!requestActive">
       <b-row>
         <b-col />
-        <b-col cols=10>
+        <b-col md=10>
           <b-form-group>
             <small id="contentHelpId" class="text-muted">Content</small>
             <b-form-input v-model="content" aria-describedby="contentHelpId" />
@@ -16,7 +16,7 @@
 
       <b-row>
         <b-col />
-        <b-col cols=10>
+        <b-col md=10>
           <b-form-group>
             <small id="descriptionHelpId" class="text-muted">Description</small>
             <b-form-textarea v-model="description" aria-describedby="descriptionHelpId" />

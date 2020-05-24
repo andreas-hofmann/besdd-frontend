@@ -4,19 +4,19 @@
 
     <b-container v-if="!requestActive">
       <b-row>
-        <b-col cols=4>
+        <b-col md=4>
           <b-form-group>
             <small id="dateHelpId" class="text-muted">Day</small>
             <b-form-datepicker today-button no-close-button v-model="date" aria-describedby="dateHelpId" />
           </b-form-group>
         </b-col>
-        <b-col cols=4>
+        <b-col md=4>
           <b-form-group>
             <small id="starttimeHelpId" class="text-muted">Start time</small>
             <b-form-timepicker now-button no-close-button v-model="starttime" aria-describedby="starttimeHelpId" />
           </b-form-group>
         </b-col>
-        <b-col cols=4>
+        <b-col md=4>
           <b-form-group>
             <small id="endtimeHelpId" class="text-muted">End time</small>
             <b-form-timepicker now-button reset-button no-close-button v-model="endtime" aria-describedby="endtimeHelpId" />

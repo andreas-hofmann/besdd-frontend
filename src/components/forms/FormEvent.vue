@@ -5,13 +5,13 @@
     <b-container v-if="!requestActive">
       <b-row>
         <b-col />
-        <b-col cols=5>
+        <b-col md=5>
           <b-form-group>
             <small id="dateHelpId" class="text-muted">Day</small>
             <b-form-datepicker today-button no-close-button v-model="date" aria-describedby="dateHelpId" />
           </b-form-group>
         </b-col>
-        <b-col cols=5>
+        <b-col md=5>
           <b-form-group>
             <small id="timeHelpId" class="text-muted">Time</small>
             <b-form-timepicker now-button no-close-button v-model="time" aria-describedby="timeHelpId" />
@@ -22,7 +22,7 @@
 
       <b-row>
         <b-col />
-        <b-col cols=10>
+        <b-col md=10>
           <b-form-group>
             <small id="eventHelpId" class="text-muted">Event</small>
             <b-form-input v-model="event" aria-describedby="eventHelpId" />
@@ -33,7 +33,7 @@
 
       <b-row>
         <b-col />
-        <b-col cols=10>
+        <b-col md=10>
           <b-form-group>
             <small id="descriptionHelpId" class="text-muted">Description</small>
             <b-form-textarea v-model="description" aria-describedby="descriptionHelpId" />

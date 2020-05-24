@@ -5,7 +5,7 @@
     <b-container v-if="!requestActive">
       <b-row>
         <b-col />
-        <b-col cols=5>
+        <b-col md=5>
           <b-form-group>
             <small id="passwordHelpId" class="text-muted">Old password</small>
             <b-form-input type="password" v-model="old_password" aria-describedby="passwordHelpId" />
@@ -16,7 +16,7 @@
 
       <b-row>
         <b-col />
-        <b-col cols=5>
+        <b-col md=5>
           <b-form-group>
             <small id="newpasswordHelpId" class="text-muted">New password</small>
             <b-form-input type="password" v-model="new_password1" aria-describedby="newpasswordHelpId" />
@@ -27,7 +27,7 @@
 
       <b-row>
         <b-col />
-        <b-col cols=5>
+        <b-col md=5>
           <b-form-group>
             <small id="newpassword2HelpId" class="text-muted">New password (confirmation)</small>
             <b-form-input type="password" v-model="new_password2" aria-describedby="newpassword2HelpId" />

@@ -5,13 +5,13 @@
     <b-container v-if="!requestActive">
       <b-row>
         <b-col />
-        <b-col cols=6>
+        <b-col md=6>
           <b-form-group>
             <small id="dateHelpId" class="text-muted">Day</small>
             <b-form-datepicker today-button no-close-button v-model="date" aria-describedby="dateHelpId" />
           </b-form-group>
         </b-col>
-        <b-col cols=4>
+        <b-col md=4>
           <b-form-group>
             <small id="timeHelpId" class="text-muted">Time</small>
             <b-form-timepicker now-button no-close-button v-model="time" aria-describedby="timeHelpId" />
@@ -21,7 +21,7 @@
       </b-row>
       <b-row>
         <b-col />
-        <b-col cols=6>
+        <b-col md=6>
           <b-form-group>
             <small id="foodsHelpId" class="text-muted">Foods eaten</small>
             <b-form-checkbox-group v-model="foods" aria-describedby="foodsHelpId" >
@@ -29,7 +29,7 @@
             </b-form-checkbox-group>
           </b-form-group>
         </b-col>
-        <b-col cols=4>
+        <b-col md=4>
           <b-form-group>
             <small id="untilHelpId" class="text-muted">Until</small>
             <b-form-timepicker now-button reset-button no-close-button v-model="until" aria-describedby="untilHelpId" />

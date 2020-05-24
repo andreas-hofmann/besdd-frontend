@@ -4,25 +4,25 @@
 
     <b-container v-if="!requestActive">
       <b-row>
-        <b-col cols=5>
+        <b-col md=5>
           <b-form-group>
             <small id="dateHelpId" class="text-muted">Day</small>
             <b-form-datepicker today-button no-close-button v-model="date" aria-describedby="dateHelpId" />
           </b-form-group>
         </b-col>
-        <b-col cols=3>
+        <b-col md=3>
           <b-form-group>
             <small id="timeHelpId" class="text-muted">Time</small>
             <b-form-timepicker now-button no-close-button v-model="time" aria-describedby="timeHelpId" />
           </b-form-group>
         </b-col>
-        <b-col cols=2>
+        <b-col md=2>
           <b-form-group>
             <small id="heightHelpId" class="text-muted">Height</small>
             <b-form-input v-model="height" aria-describedby="heightHelpId" />
           </b-form-group>
         </b-col>
-        <b-col cols=2>
+        <b-col md=2>
           <b-form-group>
             <small id="weightHelpId" class="text-muted">Weight</small>
             <b-form-input v-model="weight" aria-describedby="weightHelpId" />

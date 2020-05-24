@@ -5,13 +5,13 @@
     <b-container v-if="!requestActive">
       <b-row>
         <b-col />
-        <b-col cols=5>
+        <b-col md=5>
           <b-form-group>
             <small id="birthdayHelpId" class="text-muted">Birthday</small>
             <b-form-datepicker v-model="birthday" aria-describedby="birthdayHelpId" />
           </b-form-group>
         </b-col>
-        <b-col cols=5>
+        <b-col md=5>
           <b-form-group>
             <small id="nameHelpId" class="text-muted">Name</small>
             <b-form-input v-model="name" aria-describedby="nameHelpId" />
@@ -21,13 +21,13 @@
       </b-row>
       <b-row>
         <b-col />
-        <b-col cols=8>
+        <b-col md=8>
           <b-form-group>
             <small id="parentsHelpId" class="text-muted">Parents (comma separated)</small>
             <b-form-input v-model="parents" aria-describedby="parentsHelpId" />
           </b-form-group>
         </b-col>
-        <b-col cols=2>
+        <b-col md=2>
           <b-form-group>
             <small id="genderHelpId" class="text-muted">Gender</small>
             <b-form-select v-model="gender" aria-describedby="gendersHelpId">

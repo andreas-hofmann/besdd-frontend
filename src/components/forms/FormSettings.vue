@@ -4,20 +4,20 @@
 
     <b-container v-if="!requestActive">
       <b-row>
-        <b-col cols=6>
+        <b-col md=6>
           <b-form-group>
             <small id="childHelpId" class="text-muted">Default child</small>
             <b-form-select aria-described-by="childHelpId" v-model="settings.default_child" :options="allChildren"  value-field="id" text-field="name">
             </b-form-select>
           </b-form-group>
         </b-col>
-        <b-col cols=3>
+        <b-col md=3>
           <b-form-group>
             <small id="rasterHelpId" class="text-muted">Histogram raster (minutes)</small>
             <b-form-input aria-described-by="rasterHelpId" v-model="settings.histogram_raster" :value="settings.histogram_raster" />
           </b-form-group>
         </b-col>
-        <b-col cols=3>
+        <b-col md=3>
           <b-form-group>
             <small id="factorHelpId" class="text-muted">Time factor (meals+diapers)</small>
             <b-form-input aria-described-by="factorHelpId" v-model="settings.histogram_factor_md" :value="settings.histogram_factor_md" />
@@ -26,25 +26,25 @@
       </b-row>
 
       <b-row>
-        <b-col cols=3>
+        <b-col md=3>
           <b-form-group>
             <small id="paginateHelpId" class="text-muted">Paginate by:</small>
             <b-form-input aria-described-by="paginateHelpId" v-model="settings.paginate_by" :value="settings.paginate_by" />
           </b-form-group>
         </b-col>
-        <b-col cols=3>
+        <b-col md=3>
           <b-form-group>
             <small id="rangeHelpId" class="text-muted">Default date range (days)</small>
             <b-form-input aria-described-id="rangeHelpId" v-model="settings.date_range_days" :value="settings.date_range_days" />
           </b-form-group>
         </b-col>
-        <b-col cols=3>
+        <b-col md=3>
           <b-form-group>
             <small id="startDayHelpId" class="text-muted">Start hour day</small>
             <b-form-input are-described-by="startDayHelpId" v-model="settings.start_hour_day" :value="settings.start_hour_day" />
           </b-form-group>
         </b-col>
-        <b-col cols=3>
+        <b-col md=3>
           <b-form-group>
             <small id="startNightHelpId" class="text-muted">Start hour night</small>
             <b-form-input aria-described-by="startNightHelpId" v-model="settings.start_hour_night" :value="settings.start_hour_night" />

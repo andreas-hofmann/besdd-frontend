@@ -59,7 +59,7 @@ export default {
         return {
             date: moment().local().toDate(),
             time: String(moment().local().format("HH:mm")),
-            until: String(moment().local().format("HH:mm")),
+            until: "",
             foods: [],
             foodChoices: [],
             helpers: helpers,
@@ -88,9 +88,14 @@ export default {
         .done((data) => {
           this.date = moment(data.dt).local().toDate();
           this.time = moment(data.dt).local().format("HH:mm");
-          this.until = moment(data.dt_end).local().format("HH:mm");
           this.foods = data.food;
           this.foodChoices = data.food_choices;
+
+          if (data.dt_end) {
+            this.until = moment(data.dt_end).local().format("HH:mm");
+          } else {
+            this.until = moment().local().format("HH:mm");
+          }
         });
       } else {
         this.loadAjax({

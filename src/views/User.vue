@@ -27,6 +27,9 @@
         <template v-if="prefs === 'diapercontents'">
             <DetailsListDiaperContents />
         </template>
+        <template v-if="prefs === 'diapertypes'">
+            <DetailsListDiaperTypes />
+        </template>
         <template v-else-if="!validType">
             Invalid settings requested.
         </template>
@@ -44,6 +47,7 @@ import UserTabbar from '../components/UserTabbar.vue';
 import DetailsListChildren from '../components/lists/DetailsListChildren.vue';
 import DetailsListFoods from '../components/lists/DetailsListFoods.vue';
 import DetailsListDiaperContents from '../components/lists/DetailsListDiaperContents.vue';
+import DetailsListDiaperTypes from '../components/lists/DetailsListDiaperTypes.vue';
 import FormSettings from '../components/forms/FormSettings.vue';
 import FormPassword from '../components/forms/FormPassword.vue';
 
@@ -71,6 +75,7 @@ export default {
     DetailsListChildren,
     DetailsListFoods,
     DetailsListDiaperContents,
+    DetailsListDiaperTypes,
     FormSettings,
     FormPassword,
   },
@@ -81,6 +86,7 @@ export default {
       case 'children':
       case 'foods':
       case 'diapercontents':
+      case 'diapertypes':
       case 'settings':
       case 'password':
         return true;

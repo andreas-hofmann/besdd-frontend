@@ -93,8 +93,6 @@ export default {
 
           if (data.dt_end) {
             this.until = moment(data.dt_end).local().format("HH:mm");
-          } else {
-            this.until = moment().local().format("HH:mm");
           }
         });
       } else {

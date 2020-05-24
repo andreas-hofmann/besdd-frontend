@@ -112,10 +112,21 @@ export default {
   data: function () {
     return {
       userdata: this.$root.userdata,
+      currentChild: 0,
       cookiesAccepted: false,
       newObject: "",
       sleepId: 0,
     };
+  },
+
+  watch: {
+    currentChild: function() {
+      this.checkSleepState();
+    }
+  },
+
+  created: function() {
+    this.checkCookiesAccepted();
   },
 
   methods: {
@@ -141,6 +152,7 @@ export default {
     },
     updateCurrentChild(child) {
       this.userdata.currentChild = child;
+      this.currentChild = child.id;
     },
     refreshUserData() {
       $.get("/index/")
@@ -151,6 +163,7 @@ export default {
 
           if (data.default_child) {
             this.userdata.currentChild = data.default_child;
+            this.currentChild = data.default_child.id;
           } else {
             var max_id = 0;
             var cur_child = null;
@@ -274,10 +287,6 @@ export default {
         $('#sleep-status').html("No child selected.");
       }
     }
-  },
-  created: function() {
-    this.checkCookiesAccepted();
-    this.checkSleepState();
   },
 }
 </script>

@@ -23,10 +23,8 @@
         <b-col />
         <b-col md=6>
           <b-form-group>
-            <small id="foodsHelpId" class="text-muted">Foods eaten</small>
-            <b-form-checkbox-group v-model="foods" aria-describedby="foodsHelpId" >
-              <b-form-checkbox v-for="c in foodChoices" :key="c.id" :value="c.name">{{ c.name }}</b-form-checkbox>
-            </b-form-checkbox-group>
+            <small id="commentHelpId" class="text-muted">Comment</small>
+            <b-form-input v-model="comment" aria-describedby="commentHelpId" />
           </b-form-group>
         </b-col>
         <b-col md=4>
@@ -36,6 +34,16 @@
           </b-form-group>
         </b-col>
         <b-col />
+      </b-row>
+      <b-row>
+        <b-col>
+          <b-form-group>
+            <small id="foodsHelpId" class="text-muted">Foods eaten</small>
+            <b-form-checkbox-group v-model="foods" aria-describedby="foodsHelpId" >
+              <b-form-checkbox v-for="c in foodChoices" :key="c.id" :value="c.name">{{ c.name }}</b-form-checkbox>
+            </b-form-checkbox-group>
+          </b-form-group>
+        </b-col>
       </b-row>
 
       <FormButtons :id="id" @delete="doDelete" @submit="doSubmit" />
@@ -61,6 +69,7 @@ export default {
             time: String(moment().local().format("HH:mm")),
             until: "",
             foods: [],
+            comment: "",
             foodChoices: [],
             helpers: helpers,
         };
@@ -89,6 +98,7 @@ export default {
           this.date = moment(data.dt).local().toDate();
           this.time = moment(data.dt).local().format("HH:mm");
           this.foods = data.food;
+          this.comment = data.comment;
           this.foodChoices = data.food_choices;
 
           if (data.dt_end) {
@@ -125,6 +135,7 @@ export default {
                   'dt': helpers.getTimestamp(this.date, this.time),
                   'dt_end': helpers.getTimestamp(this.date, this.until),
                   'food': this.getFoods(),
+                  'comment': this.comment,
               },
               traditional: true, // To prevent extra brackets in food-key
           }).done( ()=> {

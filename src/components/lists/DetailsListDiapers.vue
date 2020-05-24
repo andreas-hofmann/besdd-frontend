@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-table ref="table" primary-key="id" :busy="requestActive" small head-variant="light" outlined :items="data" responsive="sm" :fields="['date', 'time', 'contents', 'type', 'actions']">
+    <b-table ref="table" primary-key="id" :busy="requestActive" small head-variant="light" outlined :items="data" responsive="sm" :fields="['date', 'time', 'contents', 'type', 'comment', 'actions']">
       <template v-slot:table-busy>
         <div class="text-center text-danger my-2">
           <b-spinner class="align-middle"></b-spinner>
@@ -17,6 +17,9 @@
       </template>
       <template v-slot:cell(type)="row">
         {{ row.item.diaper_type }}
+      </template>
+      <template v-slot:cell(comment)="row">
+        {{ row.item.comment }}
       </template>
 
       <template v-slot:cell(actions)="row">

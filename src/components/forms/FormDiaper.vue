@@ -23,10 +23,8 @@
         <b-col />
         <b-col md=6>
           <b-form-group>
-            <small id="contentsHelpId" class="text-muted">Contents</small>
-            <b-form-checkbox-group v-model="contents" aria-describedby="contentsHelpId" >
-              <b-form-checkbox v-for="c in contentChoices" :key="c.id" :value="c.name">{{ c.name }}</b-form-checkbox>
-            </b-form-checkbox-group>
+            <small id="commentHelpId" class="text-muted">Comment</small>
+            <b-input v-model="comment" aria-describedby="commentHelpId" />
           </b-form-group>
         </b-col>
         <b-col md=4>
@@ -38,6 +36,16 @@
           </b-form-group>
         </b-col>
         <b-col />
+      </b-row>
+      <b-row>
+        <b-col>
+          <b-form-group>
+            <small id="contentsHelpId" class="text-muted">Contents</small>
+            <b-form-checkbox-group v-model="contents" aria-describedby="contentsHelpId" >
+              <b-form-checkbox v-for="c in contentChoices" :key="c.id" :value="c.name">{{ c.name }}</b-form-checkbox>
+            </b-form-checkbox-group>
+          </b-form-group>
+        </b-col>
       </b-row>
 
       <FormButtons :id="id" @delete="doDelete" @submit="doSubmit" />
@@ -63,6 +71,7 @@ export default {
             time: String(moment().local().format("HH:mm")),
             contents: [],
             type: "",
+            comment: "",
             contentChoices: [],
             typeChoices: [],
             helpers: helpers,
@@ -92,6 +101,7 @@ export default {
           this.date = moment(data.dt).local().toDate();
           this.time = moment(data.dt).local().format("HH:mm");
           this.contents = data.content;
+          this.comment = data.comment;
           this.type = data.diaper_type;
           this.contentChoices = data.content_choices;
           this.typeChoices = data.type_choices;
@@ -126,6 +136,7 @@ export default {
               data: {
                   'dt': helpers.getTimestamp(this.date, this.time),
                   'content': this.getContents(),
+                  'comment': this.comment,
                   'diaper_type': this.type,
               },
               traditional: true, // To prevent extra brackets in content-key

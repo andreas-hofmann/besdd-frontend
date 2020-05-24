@@ -24,6 +24,15 @@
         </b-col>
       </b-row>
 
+      <b-row>
+        <b-col>
+          <b-form-group>
+            <small id="commentHelpId" class="text-muted">Comment</small>
+            <b-form-input v-model="comment" aria-describedby="commentHelpId" />
+          </b-form-group>
+        </b-col>
+      </b-row>
+
       <FormButtons :id="id" @delete="doDelete" @submit="doSubmit" />
 
     </b-container>
@@ -44,6 +53,7 @@ export default {
             date: moment().local().toDate(),
             starttime: String(moment().local().format("HH:mm")),
             endtime: "",
+            comment: "",
         };
     },
 
@@ -75,6 +85,8 @@ export default {
           } else {
             this.endtime = moment().local().format("HH:mm");
           }
+
+          this.comment = data.comment;
         });
       }
     },
@@ -95,14 +107,18 @@ export default {
           };
         },
         doSubmit() {
-          const timestamps = this.getTimestamps();
+          let timestamps = this.getTimestamps();
 
           this.loadAjax({
               type: "post",
               url: this.id
                     ? this.getUrl("sleepphases_edit", this.id)
                     : this.getUrl("sleepphases_add"),
-              data: timestamps,
+              data: {
+                'dt': timestamps.dt,
+                'dt_end': timestamps.dt_end,
+                'comment': this.comment,
+              },
           }).done( ()=> {
               this.$emit("updated");
           });

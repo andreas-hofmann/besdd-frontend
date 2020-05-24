@@ -30,6 +30,15 @@
         </b-col>
       </b-row>
 
+      <b-row>
+        <b-col>
+          <b-form-group>
+            <small id="commentHelpId" class="text-muted">Comment</small>
+            <b-form-input v-model="comment" aria-describedby="commentHelpId" />
+          </b-form-group>
+        </b-col>
+      </b-row>
+
       <FormButtons :id="id" @delete="doDelete" @submit="doSubmit" />
 
     </b-container>
@@ -52,6 +61,7 @@ export default {
             time: String(moment().local().format("HH:mm")),
             height: 0.0,
             weight: 0.0,
+            comment: "",
             helpers: helpers,
         };
     },
@@ -80,6 +90,7 @@ export default {
           this.time = moment(data.dt).local().format("HH:mm");
           this.height = data.height;
           this.weight = data.weight;
+          this.comment = data.comment;
         });
       }
     },
@@ -95,6 +106,7 @@ export default {
                   'dt': helpers.getTimestamp(this.date, this.time),
                   'height': this.height,
                   'weight': this.weight,
+                  'comment': this.comment,
               },
           }).done( ()=> {
               this.$emit("updated");

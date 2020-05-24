@@ -20,15 +20,19 @@
         </template>
         <template v-if="prefs === 'children'">
             <DetailsListChildren />
+            <b-button variant="primary" @click="$emit('createEntry', 'child')" >Add</b-button>
         </template>
         <template v-if="prefs === 'foods'">
             <DetailsListFoods />
+            <b-button variant="primary" @click="$emit('createEntry', 'food')" >Add</b-button>
         </template>
         <template v-if="prefs === 'diapercontents'">
             <DetailsListDiaperContents />
+            <b-button variant="primary" @click="$emit('createEntry', 'diapercontent')" >Add</b-button>
         </template>
         <template v-if="prefs === 'diapertypes'">
             <DetailsListDiaperTypes />
+            <b-button variant="primary" @click="$emit('createEntry', 'diapertype')" >Add</b-button>
         </template>
         <template v-else-if="!validType">
             Invalid settings requested.

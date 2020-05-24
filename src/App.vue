@@ -28,7 +28,7 @@
         </b-row>
       </b-container>
 
-      <router-view />
+      <router-view @createEntry="createEntry"/>
     </template>
 
     <div class="container mt-3">
@@ -72,6 +72,22 @@
         <template v-if="newObject == 'diaryentry'">
           <FormDiary @updated="closeModal" />
         </template>
+
+        <template v-if="newObject == 'child'">
+          <FormChild @updated="closeModal" />
+        </template>
+
+        <template v-if="newObject == 'food'">
+          <FormFood @updated="closeModal" />
+        </template>
+
+        <template v-if="newObject == 'diapercontent'">
+          <FormDiaperContent @updated="closeModal" />
+        </template>
+
+        <template v-if="newObject == 'diapertype'">
+          <FormDiaperType @updated="closeModal" />
+        </template>
     </b-modal>
   </div>
 </template>
@@ -93,6 +109,11 @@ import FormEvent from './components/forms/FormEvent.vue';
 import FormDiary from './components/forms/FormDiary.vue';
 import FormMeasurement from './components/forms/FormMeasurement.vue';
 
+import FormChild from './components/forms/FormChild.vue';
+import FormFood from './components/forms/FormFood.vue';
+import FormDiaperContent from './components/forms/FormDiaperContent.vue';
+import FormDiaperType from './components/forms/FormDiaperType.vue';
+
 export default {
   name: "App",
 
@@ -107,6 +128,10 @@ export default {
     FormEvent,
     FormDiary,
     FormMeasurement,
+    FormChild,
+    FormFood,
+    FormDiaperContent,
+    FormDiaperType,
   },
 
   data: function () {

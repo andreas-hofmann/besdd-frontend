@@ -5,13 +5,13 @@
     <b-container v-if="!requestActive">
       <b-row>
         <b-col />
-        <b-col md=5>
+        <b-col md=6>
           <b-form-group>
             <small id="dateHelpId" class="text-muted">Day</small>
             <b-form-datepicker today-button no-close-button v-model="date" aria-describedby="dateHelpId" />
           </b-form-group>
         </b-col>
-        <b-col md=5>
+        <b-col md=4>
           <b-form-group>
             <small id="timeHelpId" class="text-muted">Time</small>
             <b-form-timepicker now-button no-close-button v-model="time" aria-describedby="timeHelpId" />
@@ -21,12 +21,20 @@
       </b-row>
       <b-row>
         <b-col />
-        <b-col md=4>
+        <b-col md=6>
           <b-form-group>
             <small id="contentsHelpId" class="text-muted">Contents</small>
             <b-form-checkbox-group v-model="contents" aria-describedby="contentsHelpId" >
               <b-form-checkbox v-for="c in contentChoices" :key="c.id" :value="c.name">{{ c.name }}</b-form-checkbox>
             </b-form-checkbox-group>
+          </b-form-group>
+        </b-col>
+        <b-col md=4>
+          <b-form-group>
+            <small id="typeHelpId" class="text-muted">Type</small>
+            <b-form-select v-model="type" :options="typeChoices" value-field="id" text-field="name" aria-describedby="typeHelpId">
+              <b-form-select-option value="">---</b-form-select-option>
+            </b-form-select>
           </b-form-group>
         </b-col>
         <b-col />
@@ -54,7 +62,9 @@ export default {
             date: moment().local().toDate(),
             time: String(moment().local().format("HH:mm")),
             contents: [],
+            type: "",
             contentChoices: [],
+            typeChoices: [],
             helpers: helpers,
         };
     },
@@ -82,7 +92,9 @@ export default {
           this.date = moment(data.dt).local().toDate();
           this.time = moment(data.dt).local().format("HH:mm");
           this.contents = data.content;
+          this.type = data.diaper_type;
           this.contentChoices = data.content_choices;
+          this.typeChoices = data.type_choices;
         });
       } else {
         this.loadAjax({
@@ -91,6 +103,7 @@ export default {
         })
         .done((data) => {
           this.contentChoices = data.content_choices;
+          this.typeChoices = data.type_choices;
         });
       }
     },
@@ -113,6 +126,7 @@ export default {
               data: {
                   'dt': helpers.getTimestamp(this.date, this.time),
                   'content': this.getContents(),
+                  'diaper_type': this.type,
               },
               traditional: true, // To prevent extra brackets in content-key
           }).done( ()=> {

@@ -149,6 +149,7 @@ export default {
     },
     closeModal() {
       this.$refs.createModal.hide();
+      this.checkSleepState();
     },
     updateCurrentChild(child) {
       this.userdata.currentChild = child;

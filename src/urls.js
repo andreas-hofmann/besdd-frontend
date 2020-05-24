@@ -11,6 +11,9 @@ function getUrl(userid, childid, target, targetid=0) {
     case "diapercontents":      return '/diapercontents/';
     case "diapercontents_add":  return '/diapercontents/add/';
     case "diapercontents_edit": return '/diapercontents/edit/' + targetid + '/';
+    case "diapertypes":         return '/diapertypes/';
+    case "diapertypes_add":     return '/diapertypes/add/';
+    case "diapertypes_edit":    return '/diapertypes/edit/' + targetid + '/';
     case "sleepphases_quickadd": return '/' + childid + '/sleep/quickadd/';
     case "sleepphases":         return '/' + childid + '/sleep/';
     case "sleepphases_add":     return '/' + childid + '/sleep/add/';

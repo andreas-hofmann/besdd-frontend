@@ -4,7 +4,7 @@ function getUrl(userid, childid, target, targetid=0) {
     case "children":            return '/children/';
     case "child_add":           return '/children/add/';
     case "child_edit":          return '/children/' + targetid + '/edit/';
-    case "settings":            return '/settings/' + userid + '/';
+    case "settings":            return '/settings/';
     case "foods":               return '/foods/';
     case "foods_add":           return '/foods/add/';
     case "foods_edit":          return '/foods/edit/' + targetid + '/';

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-table ref="table" primary-key="id" :busy="requestActive" small head-variant="light" outlined :items="data" responsive="sm" :fields="['date', 'time', 'until', 'foods', 'comment', 'actions']">
+    <b-table ref="table" primary-key="id" :busy="requestActive" small head-variant="light" outlined :items="data" responsive="sm" :fields="['date', 'time', 'until', 'duration', 'foods', 'comment', 'actions']">
       <template v-slot:table-busy>
         <div class="text-center text-danger my-2">
           <b-spinner class="align-middle"></b-spinner>
@@ -15,6 +15,11 @@
       <template v-slot:cell(until)="row">
         <template v-if="row.item.dt_end">
           {{ helpers.localtime(row.item.dt_end) }}
+        </template>
+      </template>
+      <template v-slot:cell(duration)="row">
+        <template v-if="row.item.dt_end">
+          {{ helpers.durationHours(row.item.dt, row.item.dt_end) }}
         </template>
       </template>
       <template v-slot:cell(foods)="row">

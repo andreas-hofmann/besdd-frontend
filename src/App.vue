@@ -5,7 +5,7 @@
     <template v-if="!cookiesAccepted">
       <About />
     </template>
-    <template v-else-if="!userdata.user">
+    <template v-else-if="!$root.userdata.user">
       <NavbarLogin @logged-in="refreshUserData" />
       <About />
     </template>
@@ -15,7 +15,7 @@
         @child="updateCurrentChild"
         @createEntry="createEntry"
         @createEditSleep="createEditSleep"
-        :userdata="userdata">
+        :userdata="$root.userdata">
       </Navbar>
 
       <b-container>
@@ -136,7 +136,6 @@ export default {
 
   data: function () {
     return {
-      userdata: this.$root.userdata,
       currentChild: 0,
       cookiesAccepted: false,
       newObject: "",
@@ -152,6 +151,7 @@ export default {
 
   created: function() {
     this.checkCookiesAccepted();
+    this.fetchUserSettings();
   },
 
   methods: {
@@ -160,7 +160,7 @@ export default {
       this.$refs.createModal.show();
     },
     createEditSleep() {
-      $.get({ url: "/" + this.userdata.currentChild.id + "/data/current_phase/" })
+      $.get({ url: "/" + this.$root.userdata.currentChild.id + "/data/current_phase/" })
         .done( (data) => {
           this.sleepId = data.id;
           this.newObject = "sleepphase";
@@ -177,18 +177,27 @@ export default {
       this.checkSleepState();
     },
     updateCurrentChild(child) {
-      this.userdata.currentChild = child;
+      this.$root.userdata.currentChild = child;
       this.currentChild = child.id;
+    },
+    fetchUserSettings() {
+      $.get("/settings/")
+        .done( data => {
+          this.$root.usersettings = data;
+        })
+        .fail( () => {
+          console.log("Error fetching usersettings!");
+        })
     },
     refreshUserData() {
       $.get("/index/")
         .done( data => {
-          this.userdata.user = data.user;
-          this.userdata.id = data.id;
-          this.userdata.children = data.children;
+          this.$root.userdata.user = data.user;
+          this.$root.userdata.id = data.id;
+          this.$root.userdata.children = data.children;
 
           if (data.default_child) {
-            this.userdata.currentChild = data.default_child;
+            this.$root.userdata.currentChild = data.default_child;
             this.currentChild = data.default_child.id;
           } else {
             var max_id = 0;
@@ -201,7 +210,7 @@ export default {
               }
             }
 
-            this.userdata.currentChild = cur_child;
+            this.$root.userdata.currentChild = cur_child;
           }
         })
         .fail( () => {
@@ -260,13 +269,13 @@ export default {
       return str;
     },
     checkSleepState() {
-      if (this.userdata.currentChild) {
+      if (this.$root.userdata.currentChild) {
         $('#sleep-status').html("Checking...");
 
-        $.get({ url: "/" + this.userdata.currentChild.id + "/data/check/" })
+        $.get({ url: "/" + this.$root.userdata.currentChild.id + "/data/check/" })
           .done( (data) => {
             let el = $('#sleep-status');
-            let state = this.userdata.currentChild.name + " is ";
+            let state = this.$root.userdata.currentChild.name + " is ";
             let since = "";
 
             if (data['sleep']['state'] >= 0) {

@@ -7,7 +7,7 @@
             <b-row class="mt-2">
               <div v-if="summary.sleep" class="col-xs small mt-2 ml-2">
                 <small>
-                  Slept {{ secToHHMM(summary.sleep.sum.time) }} h in
+                  Slept {{ secToHHMM(summary.sleep.sum.time) }} in
                   {{ summary.sleep.sum.count }} phases.
                 </small>
               </div>
@@ -78,8 +78,8 @@
                   <p>
                     {{ secToHHMM(summary.sleep.sum.time) }} in
                     {{ summary.sleep.sum.count }} phases.<br />
-                    Avg. length {{ avgTime(summary.sleep.sum) }} hours.<br />
-                    Avg. interval {{ avgInterval(summary.sleep.sum) }} hours.
+                    Avg. length {{ avgTime(summary.sleep.sum) }}.<br />
+                    Avg. interval {{ avgInterval(summary.sleep.sum) }}.
                   </p>
                 </b-col>
                 <b-col md>
@@ -87,8 +87,8 @@
                   <p>
                     {{ secToHHMM(summary.sleep.day.time) }} in
                     {{ summary.sleep.day.count }} phases.<br />
-                    Avg. length {{ avgTime(summary.sleep.day) }} hours.<br />
-                    Avg. interval {{ avgInterval(summary.sleep.day) }} hours.
+                    Avg. length {{ avgTime(summary.sleep.day) }}.<br />
+                    Avg. interval {{ avgInterval(summary.sleep.day) }}.
                   </p>
                 </b-col>
                 <b-col md>
@@ -96,8 +96,8 @@
                   <p>
                     {{ secToHHMM(summary.sleep.night.time) }} in
                     {{ summary.sleep.night.count }} phases.<br />
-                    Avg. length {{ avgTime(summary.sleep.night) }} hours.<br />
-                    Avg. interval {{ avgInterval(summary.sleep.night) }} hours.
+                    Avg. length {{ avgTime(summary.sleep.night) }}.<br />
+                    Avg. interval {{ avgInterval(summary.sleep.night) }}.
                   </p>
                 </b-col>
               </b-row>
@@ -118,9 +118,9 @@
                     {{ summary.meals.sum.count }} meals eaten.<br />
                     <template v-if="$root.usersettings.show_meal_durations">
                       Total feeding time {{ secToHHMM(summary.meals.sum.time) }} .<br />
-                      Avg. feeding time {{ avgTime(summary.meals.sum) }} hours.<br />
+                      Avg. feeding time {{ avgTime(summary.meals.sum) }}.<br />
                     </template>
-                    Avg. interval {{ avgInterval(summary.meals.sum) }} hours.
+                    Avg. interval {{ avgInterval(summary.meals.sum) }}.
                   </p>
                 </b-col>
                 <b-col md>
@@ -129,9 +129,9 @@
                     {{ summary.meals.day.count }} meals eaten.<br />
                     <template v-if="$root.usersettings.show_meal_durations">
                       Total feeding time {{ secToHHMM(summary.meals.day.time) }} .<br />
-                      Avg. feeding time {{ avgTime(summary.meals.day) }} hours.<br />
+                      Avg. feeding time {{ avgTime(summary.meals.day) }}.<br />
                     </template>
-                    Avg. interval {{ avgInterval(summary.meals.day) }} hours.
+                    Avg. interval {{ avgInterval(summary.meals.day) }}.
                   </p>
                 </b-col>
                 <b-col md>
@@ -139,10 +139,10 @@
                   <p>
                     {{ summary.meals.night.count }} meals eaten.<br />
                     <template v-if="$root.usersettings.show_meal_durations">
-                      Total feeding time {{ secToHHMM(summary.meals.night.time) }} hours.<br />
-                      Avg. feeding time {{ avgTime(summary.meals.night) }} hours.<br />
+                      Total feeding time {{ secToHHMM(summary.meals.night.time) }}.<br />
+                      Avg. feeding time {{ avgTime(summary.meals.night) }}.<br />
                     </template>
-                    Avg. interval {{ avgInterval(summary.meals.night) }} hours.
+                    Avg. interval {{ avgInterval(summary.meals.night) }}.
                   </p>
                 </b-col>
               </b-row>
@@ -161,21 +161,21 @@
                   <h5>Total:</h5>
                   <p>
                     {{ summary.diapers.sum.count }} diapers used.<br />
-                    Avg. interval {{ avgInterval(summary.diapers.sum) }} hours.
+                    Avg. interval {{ avgInterval(summary.diapers.sum) }}.
                   </p>
                 </b-col>
                 <b-col md>
                   <h5>Day:</h5>
                   <p>
                     {{ summary.diapers.day.count }} diapers used.<br />
-                    Avg. interval {{ avgInterval(summary.diapers.day) }} hours.
+                    Avg. interval {{ avgInterval(summary.diapers.day) }}.
                   </p>
                 </b-col>
                 <b-col md>
                   <h5>Night:</h5>
                   <p>
                     {{ summary.diapers.night.count }} diapers used.<br />
-                    Avg. interval {{ avgInterval(summary.diapers.night) }} hours.
+                    Avg. interval {{ avgInterval(summary.diapers.night) }}.
                   </p>
                 </b-col>
               </b-row>

@@ -36,7 +36,8 @@
         <b-col />
       </b-row>
       <b-row>
-        <b-col>
+        <b-col />
+        <b-col md=10>
           <b-form-group>
             <small id="foodsHelpId" class="text-muted">Foods eaten</small>
             <b-form-checkbox-group v-model="foods" aria-describedby="foodsHelpId" >
@@ -44,6 +45,7 @@
             </b-form-checkbox-group>
           </b-form-group>
         </b-col>
+        <b-col />
       </b-row>
 
       <FormButtons :id="id" @delete="confirmDelete" @submit="doSubmit" />

@@ -39,7 +39,7 @@
         </b-col>
       </b-row>
 
-      <FormButtons :id="id" @delete="doDelete" @submit="doSubmit" />
+      <FormButtons :id="id" @delete="confirmDelete" @submit="doSubmit" />
 
     </b-container>
 </div>

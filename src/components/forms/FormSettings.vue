@@ -178,6 +178,7 @@ export default {
               traditional: true, // To prevent extra brackets in content-key
           }).done( ()=> {
               this.$emit("updated");
+              this.$root.fetchUserSettings();
           });
         },
     }

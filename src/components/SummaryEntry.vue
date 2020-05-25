@@ -7,7 +7,7 @@
             <b-row class="mt-2">
               <div v-if="summary.sleep" class="col-xs small mt-2 ml-2">
                 <small>
-                  Slept {{ secToHours(summary.sleep.sum.time) }} h in
+                  Slept {{ secToHHMM(summary.sleep.sum.time) }} h in
                   {{ summary.sleep.sum.count }} phases.
                 </small>
               </div>
@@ -76,7 +76,7 @@
                 <b-col md>
                   <h5>Total:</h5>
                   <p>
-                    {{ secToHours(summary.sleep.sum.time) }} hours in
+                    {{ secToHHMM(summary.sleep.sum.time) }} in
                     {{ summary.sleep.sum.count }} phases.<br />
                     Avg. length {{ avgTime(summary.sleep.sum) }} hours.<br />
                     Avg. interval {{ avgInterval(summary.sleep.sum) }} hours.
@@ -85,7 +85,7 @@
                 <b-col md>
                   <h5>Day:</h5>
                   <p>
-                    {{ secToHours(summary.sleep.day.time) }} hours in
+                    {{ secToHHMM(summary.sleep.day.time) }} in
                     {{ summary.sleep.day.count }} phases.<br />
                     Avg. length {{ avgTime(summary.sleep.day) }} hours.<br />
                     Avg. interval {{ avgInterval(summary.sleep.day) }} hours.
@@ -94,7 +94,7 @@
                 <b-col md>
                   <h5>Night:</h5>
                   <p>
-                    {{ secToHours(summary.sleep.night.time) }} hours in
+                    {{ secToHHMM(summary.sleep.night.time) }} in
                     {{ summary.sleep.night.count }} phases.<br />
                     Avg. length {{ avgTime(summary.sleep.night) }} hours.<br />
                     Avg. interval {{ avgInterval(summary.sleep.night) }} hours.
@@ -117,7 +117,7 @@
                   <p>
                     {{ summary.meals.sum.count }} meals eaten.<br />
                     <template v-if="$root.usersettings.show_meal_durations">
-                      Total feeding time {{ secToHours(summary.meals.sum.time) }} hours.<br />
+                      Total feeding time {{ secToHHMM(summary.meals.sum.time) }} .<br />
                       Avg. feeding time {{ avgTime(summary.meals.sum) }} hours.<br />
                     </template>
                     Avg. interval {{ avgInterval(summary.meals.sum) }} hours.
@@ -128,7 +128,7 @@
                   <p>
                     {{ summary.meals.day.count }} meals eaten.<br />
                     <template v-if="$root.usersettings.show_meal_durations">
-                      Total feeding time {{ secToHours(summary.meals.day.time) }} hours.<br />
+                      Total feeding time {{ secToHHMM(summary.meals.day.time) }} .<br />
                       Avg. feeding time {{ avgTime(summary.meals.day) }} hours.<br />
                     </template>
                     Avg. interval {{ avgInterval(summary.meals.day) }} hours.
@@ -139,7 +139,7 @@
                   <p>
                     {{ summary.meals.night.count }} meals eaten.<br />
                     <template v-if="$root.usersettings.show_meal_durations">
-                      Total feeding time {{ secToHours(summary.meals.night.time) }} hours.<br />
+                      Total feeding time {{ secToHHMM(summary.meals.night.time) }} hours.<br />
                       Avg. feeding time {{ avgTime(summary.meals.night) }} hours.<br />
                     </template>
                     Avg. interval {{ avgInterval(summary.meals.night) }} hours.
@@ -257,6 +257,9 @@
 </template>
 
 <script>
+
+import * as helpers from '../helpers.js';
+
 export default {
   name: "summary-entry",
   props: {
@@ -266,27 +269,33 @@ export default {
   },
   data: function() {
     return {
-      initial_expand: -1 // Row to expand initially. -1 for none.
+      initial_expand: -1, // Row to expand initially. -1 for none.
+      helpers: helpers,
     };
   },
   methods: {
-    secToHours: function(val) {
-      let value = parseFloat(val);
-      return (value / 3600).toFixed(1);
-    },
     avg: function(time, count) {
       let t = parseFloat(time);
       let c = parseFloat(count);
 
-      if (t && c) return (t / 3600 / c).toFixed(1);
+      if (t && c) return (t / c);
 
       return 0;
     },
     avgTime: function(val) {
-      return this.avg(val.time, val.count);
+      let ret = helpers.secToHHMM(this.avg(val.time, val.count));
+      if (ret.length) return ret;
+      return "0:00";
     },
     avgInterval: function(val) {
-      return this.avg(val.interval, val.count);
+      let ret = helpers.secToHHMM(this.avg(val.interval, val.count));
+      if (ret.length) return ret;
+      return "0:00";
+    },
+    secToHHMM(val) {
+      let ret = helpers.secToHHMM(val);
+      if (ret.length) return ret;
+      return "0:00";
     }
   }
 };

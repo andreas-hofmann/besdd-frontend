@@ -19,19 +19,19 @@
           <b-link href="/accounts/password_change/">Change password (legacy UI)</b-link>
         </template>
         <template v-if="prefs === 'children'">
-            <DetailsListChildren />
+            <DetailsListChildren ref="child" />
             <b-button variant="primary" @click="$emit('createEntry', 'child')" >Add</b-button>
         </template>
         <template v-if="prefs === 'foods'">
-            <DetailsListFoods />
+            <DetailsListFoods ref="food" />
             <b-button variant="primary" @click="$emit('createEntry', 'food')" >Add</b-button>
         </template>
         <template v-if="prefs === 'diapercontents'">
-            <DetailsListDiaperContents />
+            <DetailsListDiaperContents ref="diapercontent" />
             <b-button variant="primary" @click="$emit('createEntry', 'diapercontent')" >Add</b-button>
         </template>
         <template v-if="prefs === 'diapertypes'">
-            <DetailsListDiaperTypes />
+            <DetailsListDiaperTypes ref="diapertype" />
             <b-button variant="primary" @click="$emit('createEntry', 'diapertype')" >Add</b-button>
         </template>
         <template v-else-if="!validType">
@@ -83,6 +83,19 @@ export default {
   },
 
   methods: {
+    updateData(type) {
+      switch (type) {
+      case 'child':
+      case 'food':
+      case 'diapercontent':
+      case 'diapertype':
+        this.$refs[type].fetchData();
+        break;
+
+      default:
+        break;
+      }
+    },
     validType() {
       switch (this.detail_type) {
       case 'children':

@@ -10,22 +10,22 @@
     </b-row>
 
     <template v-if="detail_type === 'sleep'">
-      <DetailsListSleep :dates="dates" :childid="childid" />
+      <DetailsListSleep ref="sleepphase" :dates="dates" :childid="childid" />
     </template>
     <template v-else-if="detail_type === 'meals'">
-      <DetailsListMeals :dates="dates" :childid="childid" />
+      <DetailsListMeals ref="meal" :dates="dates" :childid="childid" />
     </template>
     <template v-else-if="detail_type === 'diapers'">
-      <DetailsListDiapers :dates="dates" :childid="childid" />
+      <DetailsListDiapers ref="diaper" :dates="dates" :childid="childid" />
     </template>
     <template v-else-if="detail_type === 'measurements'">
-      <DetailsListMeasurements :dates="dates" :childid="childid" />
+      <DetailsListMeasurements ref="measurement" :dates="dates" :childid="childid" />
     </template>
     <template v-else-if="detail_type === 'events'">
-      <DetailsListEvents :dates="dates" :childid="childid" />
+      <DetailsListEvents ref="event" :dates="dates" :childid="childid" />
     </template>
     <template v-else-if="detail_type === 'diary'">
-      <DetailsListDiary :dates="dates" :childid="childid" />
+      <DetailsListDiary ref="diaryentry" :dates="dates" :childid="childid" />
     </template>
     <template v-else-if="validType">
       <DetailsList :dates="dates" :childid="childid" :type="detail_type" />
@@ -100,6 +100,21 @@ export default {
   },
 
   methods: {
+    updateData(type) {
+      switch (type) {
+      case 'sleepphase':
+      case 'diaper':
+      case 'meal':
+      case 'measurement':
+      case 'event':
+      case 'diaryentry':
+        this.$refs[type].fetchData();
+        break;
+
+      default:
+        break;
+      }
+    },
     receiveDates(dates) {
       this.dates = dates;
     },

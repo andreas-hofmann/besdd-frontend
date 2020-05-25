@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-table ref="table" primary-key="id" :busy="requestActive" small head-variant="light" outlined :items="data" responsive="sm" :fields="['date', 'time', 'until', 'duration', 'foods', 'comment', 'actions']">
+    <b-table ref="table" primary-key="id" :busy="requestActive" small head-variant="light" outlined :items="data" responsive="sm" :fields="fields">
       <template v-slot:table-busy>
         <div class="text-center text-danger my-2">
           <b-spinner class="align-middle"></b-spinner>
@@ -78,7 +78,8 @@ export default {
 
   data: function() {
     return {
-        helpers: helpers
+        helpers: helpers,
+        fields: ['date', 'time', 'until', 'duration', 'foods', 'comment', 'actions']
     };
   },
 
@@ -91,6 +92,13 @@ export default {
 
   methods: {
     fetchData() {
+
+      if (this.$root.usersettings.show_meal_durations) {
+        this.fields = ['date', 'time', 'until', 'duration', 'foods', 'comment', 'actions']
+      } else {
+        this.fields = ['date', 'time', 'foods', 'comment', 'actions']
+      }
+
       this.loadAjax({ url: this.getUrl("meals"), data: { from: this.dates.from, to: this.dates.to } })
       .done(data => {
         this.initAccordion(data);

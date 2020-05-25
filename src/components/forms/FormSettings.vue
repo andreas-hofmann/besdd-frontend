@@ -3,6 +3,7 @@
     <b-spinner v-show="requestActive" class="mt-4"/>
 
     <b-container v-if="!requestActive">
+
       <b-row>
         <b-col md=6>
           <b-form-group>
@@ -11,6 +12,21 @@
             </b-form-select>
           </b-form-group>
         </b-col>
+        <b-col>
+          <b-form-group>
+            <small id="newUiHelpId" class="text-muted">Use new UI?</small>
+            <b-form-checkbox v-model="settings.use_new_ui"  aria-described-by="newUiHelpId" />
+          </b-form-group>
+        </b-col>
+        <b-col>
+          <b-form-group>
+            <small id="mealDurationsHelpId" class="text-muted">Show meal durations?</small>
+            <b-form-checkbox v-model="settings.show_meal_durations"  aria-described-by="mealDurationsHelpId" />
+          </b-form-group>
+        </b-col>
+      </b-row>
+
+      <b-row>
         <b-col md=3>
           <b-form-group>
             <small id="rasterHelpId" class="text-muted">Histogram raster (minutes)</small>
@@ -23,19 +39,26 @@
             <b-form-input aria-described-by="factorHelpId" v-model="settings.histogram_factor_md" :value="settings.histogram_factor_md" />
           </b-form-group>
         </b-col>
+        <b-col>
+          <b-form-group>
+            <small id="graphsHelpId" class="text-muted">Plots enabled by default</small>
+            <b-form-checkbox-group v-model="enabledGraphs" :options="graphOptions"  aria-described-by="graphsHelpId">
+            </b-form-checkbox-group>
+          </b-form-group>
+        </b-col>
       </b-row>
 
       <b-row>
         <b-col md=3>
           <b-form-group>
-            <small id="paginateHelpId" class="text-muted">Paginate by:</small>
-            <b-form-input aria-described-by="paginateHelpId" v-model="settings.paginate_by" :value="settings.paginate_by" />
+            <small id="rangeHelpId" class="text-muted">Default days range (summary)</small>
+            <b-form-input aria-described-id="rangeHelpId" v-model="settings.date_range_days" :value="settings.date_range_days" />
           </b-form-group>
         </b-col>
         <b-col md=3>
           <b-form-group>
-            <small id="rangeHelpId" class="text-muted">Default date range (days)</small>
-            <b-form-input aria-described-id="rangeHelpId" v-model="settings.date_range_days" :value="settings.date_range_days" />
+            <small id="detailsrangeHelpId" class="text-muted">Default days range (details)</small>
+            <b-form-input aria-described-id="detailsrangeHelpId" v-model="settings.date_range_days_details" :value="settings.date_range_days" />
           </b-form-group>
         </b-col>
         <b-col md=3>
@@ -53,17 +76,10 @@
       </b-row>
 
       <b-row>
-        <b-col>
+        <b-col md=3>
           <b-form-group>
-            <small id="graphsHelpId" class="text-muted">Plots enabled by default</small>
-            <b-form-checkbox-group v-model="enabledGraphs" :options="graphOptions"  aria-described-by="graphsHelpId">
-            </b-form-checkbox-group>
-          </b-form-group>
-        </b-col>
-        <b-col>
-          <b-form-group>
-            <small id="newUiHelpId" class="text-muted">Use new UI?</small>
-            <b-form-checkbox v-model="settings.use_new_ui"  aria-described-by="newUiHelpId" />
+            <small id="paginateHelpId" class="text-muted">Paginate by:</small>
+            <b-form-input aria-described-by="paginateHelpId" v-model="settings.paginate_by" :value="settings.paginate_by" />
           </b-form-group>
         </b-col>
       </b-row>
@@ -97,6 +113,7 @@ export default {
               histogram_raster: 0,
               histogram_factor_md: 0,
               use_new_ui: 0,
+              show_meal_durations: 0,
             },
             allChildren: [],
             enabledGraphs: [],
@@ -121,6 +138,7 @@ export default {
       .done((data) => {
         this.settings.paginate_by = data.paginate_by;
         this.settings.date_range_days = data.date_range_days;
+        this.settings.date_range_days_details = data.date_range_days_details;
         this.settings.sleep_enabled = data.sleep_enabled;
         this.settings.meals_enabled = data.meals_enabled;
         this.settings.diapers_enabled = data.diapers_enabled;
@@ -130,6 +148,7 @@ export default {
         this.settings.histogram_factor_md = data.histogram_factor_md;
         this.settings.default_child = data.default_child;
         this.settings.use_new_ui = data.use_new_ui;
+        this.settings.show_meal_durations = data.show_meal_durations;
 
         this.allChildren = this.$root.userdata.children;
 

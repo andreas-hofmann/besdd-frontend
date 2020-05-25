@@ -1,5 +1,13 @@
 import moment from 'moment';
 
+function padLeading(str, len, pad) {
+  let s = String(str);
+  while (s.length < len) {
+    s = String(pad) + s;
+  }
+  return s;
+}
+
 function secToHours(val) {
   var value = parseFloat(val);
   return (value / 3600).toFixed(1);
@@ -8,6 +16,16 @@ function secToHours(val) {
 function secToMinutes(val) {
   var value = parseFloat(val);
   return (value / 60).toFixed(1);
+}
+
+function secToHHMM(val) {
+  let hours = secToHours(val);
+  let minutes = parseFloat(secToMinutes(val));
+
+  if (!minutes)
+    return "";
+
+  return String(Math.floor(hours)) + ":" + padLeading(Math.floor(minutes % 60), 2, 0);
 }
 
 function durationSecs(from, to) {
@@ -19,23 +37,9 @@ function durationSecs(from, to) {
   return ms/1000;
 }
 
-function padLeading(str, len, pad) {
-  let s = String(str);
-  while (s.length < len) {
-    s = String(pad) + s;
-  }
-  return s;
-}
-
 function durationHours(from, to) {
   let secs = durationSecs(from, to);
-  let hours = secToHours(secs);
-  let minutes = parseFloat(secToMinutes(secs));
-
-  if (!minutes)
-    return "";
-
-  return String(Math.floor(hours)) + ":" + padLeading(Math.floor(minutes % 60), 2, 0);
+  return secToHHMM(secs);
 }
 
 function localdate(utc) {
@@ -72,4 +76,13 @@ function allItemsString(itemsArray) {
   return ret;
 }
 
-export { durationSecs, durationHours, localdate, localtime, secToHours, getTimestamp, allItemsString };
+export {
+  durationSecs,
+  durationHours,
+  localdate,
+  localtime,
+  secToHours,
+  getTimestamp,
+  allItemsString,
+  secToHHMM
+};

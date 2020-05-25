@@ -7,16 +7,16 @@
         </div>
       </template>
       <template v-slot:cell(date)="row">
-        {{ helpers.localdate(row.item.from) }}
+        {{ helpers.localdate(row.item.dt) }}
       </template>
       <template v-slot:cell(from)="row">
-        {{ helpers.localtime(row.item.from) }}
+        {{ helpers.localtime(row.item.dt) }}
       </template>
       <template v-slot:cell(to)="row">
-        {{ helpers.localtime(row.item.to) }}
+        {{ helpers.localtime(row.item.dt_end) }}
       </template>
       <template v-slot:cell(duration)="row">
-        {{ helpers.durationHours(row.item.from, row.item.to) }}
+        {{ helpers.durationHours(row.item.dt, row.item.dt_end) }}
       </template>
       <template v-slot:cell(comment)="row">
         {{ row.item.comment }}

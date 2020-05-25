@@ -270,7 +270,6 @@ export default {
   data: function() {
     return {
       initial_expand: -1, // Row to expand initially. -1 for none.
-      helpers: helpers,
     };
   },
   methods: {

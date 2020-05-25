@@ -4,9 +4,9 @@
 
     <template v-if="!requestActive">
       <p v-if="my_data.avg != null" id="averages" class="mt-3">
-        Average sleep time: {{ my_data.avg.time }} hours in
+        Average sleep time: {{ helpers.secToHHMM(my_data.avg.time) }} hours in
         {{ my_data.avg.phases }} phases.<br />
-        Average interval between sleeps: {{ my_data.avg.interval }} hours.
+        Average interval between sleeps: {{ helpers.secToHHMM(my_data.avg.interval) }} hours.
       </p>
       <div id="accordion" role="tablist">
         <summary-entry
@@ -25,6 +25,8 @@
 import SummaryEntry from "./SummaryEntry.vue";
 
 import { LoadingMixin, UrlMixin } from "../mixins.js";
+
+import * as helpers from '../helpers.js';
 
 export default {
   name: 'SummaryList',
@@ -46,6 +48,7 @@ export default {
   data: function() {
     return {
       my_data: [],
+      helpers: helpers,
     };
   },
 

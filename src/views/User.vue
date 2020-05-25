@@ -16,7 +16,7 @@
             <FormSettings />
         </template>
         <template v-if="prefs === 'password'">
-            <FormPassword />
+          <b-link href="/accounts/password_change/">Change password (legacy UI)</b-link>
         </template>
         <template v-if="prefs === 'children'">
             <DetailsListChildren />
@@ -53,7 +53,6 @@ import DetailsListFoods from '../components/lists/DetailsListFoods.vue';
 import DetailsListDiaperContents from '../components/lists/DetailsListDiaperContents.vue';
 import DetailsListDiaperTypes from '../components/lists/DetailsListDiaperTypes.vue';
 import FormSettings from '../components/forms/FormSettings.vue';
-import FormPassword from '../components/forms/FormPassword.vue';
 
 import moment from 'moment';
 
@@ -81,7 +80,6 @@ export default {
     DetailsListDiaperContents,
     DetailsListDiaperTypes,
     FormSettings,
-    FormPassword,
   },
 
   methods: {

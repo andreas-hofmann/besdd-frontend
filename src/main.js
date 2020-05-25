@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+import $ from 'jquery';
 
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
@@ -25,5 +26,16 @@ new Vue({
   data: {
     userdata: userdata,
     usersettings: usersettings,
+  },
+  methods: {
+    fetchUserSettings() {
+      $.get("/settings/")
+        .done( data => {
+          this.usersettings = data;
+        })
+        .fail( () => {
+          console.log("Error fetching usersettings!");
+        })
+    },
   }
 }).$mount("#app");

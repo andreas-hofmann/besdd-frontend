@@ -151,7 +151,7 @@ export default {
 
   created: function() {
     this.checkCookiesAccepted();
-    this.fetchUserSettings();
+    this.$root.fetchUserSettings();
   },
 
   methods: {
@@ -179,15 +179,6 @@ export default {
     updateCurrentChild(child) {
       this.$root.userdata.currentChild = child;
       this.currentChild = child.id;
-    },
-    fetchUserSettings() {
-      $.get("/settings/")
-        .done( data => {
-          this.$root.usersettings = data;
-        })
-        .fail( () => {
-          console.log("Error fetching usersettings!");
-        })
     },
     refreshUserData() {
       $.get("/index/")

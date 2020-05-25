@@ -73,7 +73,7 @@ export default {
 
   data: function() {
     return {
-      dateRangeDays: 7,
+      dateRangeDays: this.$root.usersettings.date_range_days_details,
       dates: {
         from: moment().format("YYYY-MM-DD"),
         to: moment().format("YYYY-MM-DD"),

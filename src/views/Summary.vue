@@ -71,7 +71,7 @@ export default {
         meals: false,
         diapers: false
       },
-      dateRangeDays: 14,
+      dateRangeDays: this.$root.usersettings.date_range_days,
       dates: {
         from: moment().format("YYYY-MM-DD"),
         to: moment().format("YYYY-MM-DD"),

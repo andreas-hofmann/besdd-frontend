@@ -28,7 +28,7 @@
         </b-row>
       </b-container>
 
-      <router-view @createEntry="createEntry"/>
+      <router-view ref="dataview" @createEntry="createEntry"/>
     </template>
 
     <div class="container mt-3">
@@ -175,6 +175,9 @@ export default {
     closeModal() {
       this.$refs.createModal.hide();
       this.checkSleepState();
+
+      /* eslint no-empty: ["error", { "allowEmptyCatch": true }] */
+      try { this.$refs.dataview.updateData(this.newObject); } catch { }
     },
     updateCurrentChild(child) {
       this.$root.userdata.currentChild = child;

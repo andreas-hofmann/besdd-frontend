@@ -55,8 +55,9 @@
 <script>
 import { UrlMixin, LoadingMixin, TableAccordionMixin } from "../../mixins.js";
 import * as helpers from '../../helpers.js';
-
 import FormMeal from '../forms/FormMeal.vue';
+
+import _ from 'lodash';
 
 export default {
   name: 'DetailsListMeals',
@@ -79,7 +80,6 @@ export default {
   data: function() {
     return {
         helpers: helpers,
-        fields: ['date', 'time', 'until', 'duration', 'foods', 'comment', 'actions']
     };
   },
 
@@ -90,14 +90,23 @@ export default {
 
   created:   function() { this.fetchData(); },
 
+  computed: {
+    fields: function() {
+      let my_fields = ['date', 'time', 'until', 'duration', 'foods', 'comment', 'actions'];
+
+      if (!this.data.find( d => d.comment )) {
+        _.pull(my_fields, 'comment');
+      }
+      if (!this.data.find( d => d.dt_end )) {
+        _.pull(my_fields, 'until', 'duration');
+      }
+
+      return my_fields;
+    }
+  },
+
   methods: {
     fetchData() {
-
-      if (this.$root.usersettings.show_meal_durations) {
-        this.fields = ['date', 'time', 'until', 'duration', 'foods', 'comment', 'actions']
-      } else {
-        this.fields = ['date', 'time', 'foods', 'comment', 'actions']
-      }
 
       this.loadAjax({ url: this.getUrl("meals"), data: { from: this.dates.from, to: this.dates.to } })
       .done(data => {

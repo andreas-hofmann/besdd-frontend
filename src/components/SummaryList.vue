@@ -10,7 +10,7 @@
           {{ my_data.avg.phases }} phases.<br />
           Average interval: {{ helpers.secToHHMM(my_data.avg.interval) }} hours.
         </b-col>
-        <b-col v-if="my_data.diaperstats" id="diapers" class="mt-3">
+        <b-col v-if="Object.keys(my_data.diaperstats).length" id="diapers" class="mt-3">
           <h5>Used diapers</h5>
           <div v-for="(count, type) in my_data.diaperstats" :key="type">
           {{ type }}: {{ count }}

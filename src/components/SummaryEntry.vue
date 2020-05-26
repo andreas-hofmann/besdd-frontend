@@ -116,7 +116,7 @@
                   <h5>Total:</h5>
                   <p>
                     {{ summary.meals.sum.count }} meals eaten.<br />
-                    <template v-if="$root.usersettings.show_meal_durations">
+                    <template v-if="summary.meals.sum.time">
                       Total feeding time {{ secToHHMM(summary.meals.sum.time) }} .<br />
                       Avg. feeding time {{ avgTime(summary.meals.sum) }}.<br />
                     </template>
@@ -127,7 +127,7 @@
                   <h5>Day:</h5>
                   <p>
                     {{ summary.meals.day.count }} meals eaten.<br />
-                    <template v-if="$root.usersettings.show_meal_durations">
+                    <template v-if="summary.meals.day.time">
                       Total feeding time {{ secToHHMM(summary.meals.day.time) }} .<br />
                       Avg. feeding time {{ avgTime(summary.meals.day) }}.<br />
                     </template>
@@ -138,7 +138,7 @@
                   <h5>Night:</h5>
                   <p>
                     {{ summary.meals.night.count }} meals eaten.<br />
-                    <template v-if="$root.usersettings.show_meal_durations">
+                    <template v-if="summary.meals.night.time">
                       Total feeding time {{ secToHHMM(summary.meals.night.time) }}.<br />
                       Avg. feeding time {{ avgTime(summary.meals.night) }}.<br />
                     </template>

@@ -1,9 +1,7 @@
 <template>
   <div class="home mt-3">
-    <h1>besdd - A babys eat-sleep-diaper diary.</h1>
-
     <template v-if="childData">
-      <h3>Viewing data for {{ childData.name }}:</h3>
+      <h3>Viewing data for {{ childData.name }}</h3>
 
       <p> {{ childData.name }} was born on {{ childData.birthday }}. </p>
       <p> Today {{ pronoun }} is {{ ageWeeks }} weeks old (or more precise: {{ ageDays }} days). </p>
@@ -27,7 +25,7 @@
       <p>
          In total, {{ pronoun }} has soiled {{ childData.totals.diapers }} diapers,
          eaten {{ childData.totals.meals }} meals
-         and slept {{ childData.totals.sleep }} times
+         and slept {{ childData.totals.sleep }} times.
        </p>
     </template>
   </div>

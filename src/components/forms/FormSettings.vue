@@ -18,12 +18,6 @@
             <b-form-checkbox v-model="settings.use_new_ui"  aria-described-by="newUiHelpId" />
           </b-form-group>
         </b-col>
-        <b-col>
-          <b-form-group>
-            <small id="mealDurationsHelpId" class="text-muted">Show meal durations?</small>
-            <b-form-checkbox v-model="settings.show_meal_durations"  aria-described-by="mealDurationsHelpId" />
-          </b-form-group>
-        </b-col>
       </b-row>
 
       <b-row>
@@ -113,7 +107,6 @@ export default {
               histogram_raster: 0,
               histogram_factor_md: 0,
               use_new_ui: 0,
-              show_meal_durations: 0,
             },
             allChildren: [],
             enabledGraphs: [],
@@ -148,7 +141,6 @@ export default {
         this.settings.histogram_factor_md = data.histogram_factor_md;
         this.settings.default_child = data.default_child;
         this.settings.use_new_ui = data.use_new_ui;
-        this.settings.show_meal_durations = data.show_meal_durations;
 
         this.allChildren = this.$root.userdata.children;
 

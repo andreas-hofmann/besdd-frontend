@@ -2,13 +2,25 @@
   <div>
     <b-spinner v-show="requestActive" class="mt-4"/>
 
+    <b-container>
+      <b-row>
+        <b-col v-if="my_data.avg != null" id="averages" class="mt-3">
+          <h5>Average sleep times</h5>
+          {{ helpers.secToHHMM(my_data.avg.time) }} hours in
+          {{ my_data.avg.phases }} phases.<br />
+          Average interval: {{ helpers.secToHHMM(my_data.avg.interval) }} hours.
+        </b-col>
+        <b-col v-if="my_data.diaperstats" id="diapers" class="mt-3">
+          <h5>Used diapers</h5>
+          <div v-for="(count, type) in my_data.diaperstats" :key="type">
+          {{ type }}: {{ count }}
+          </div>
+        </b-col>
+      </b-row>
+    </b-container>
     <template v-if="!requestActive">
-      <p v-if="my_data.avg != null" id="averages" class="mt-3">
-        Average sleep time: {{ helpers.secToHHMM(my_data.avg.time) }} hours in
-        {{ my_data.avg.phases }} phases.<br />
-        Average interval between sleeps: {{ helpers.secToHHMM(my_data.avg.interval) }} hours.
-      </p>
-      <div id="accordion" role="tablist">
+
+      <div id="accordion" role="tablist" class="mt-3">
         <summary-entry
           v-for="(data, idx) in my_data.data"
           :key="data.day"

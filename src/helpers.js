@@ -10,12 +10,12 @@ function padLeading(str, len, pad) {
 
 function secToHours(val) {
   var value = parseFloat(val);
-  return (value / 3600).toFixed(1);
+  return (value / 3600);
 }
 
 function secToMinutes(val) {
   var value = parseFloat(val);
-  return (value / 60).toFixed(1);
+  return (value / 60);
 }
 
 function secToHHMM(val) {

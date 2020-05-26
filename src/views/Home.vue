@@ -8,7 +8,27 @@
       <p> {{ childData.name }} was born on {{ childData.birthday }}. </p>
       <p> Today {{ pronoun }} is {{ ageWeeks }} weeks old (or more precise: {{ ageDays }} days). </p>
 
+       <p v-if="measurementValid">
+         {{ measurementTime }} {{ pronoun }}
+         <template v-if="measurementWeight">
+          weighed {{ measurementWeight }} kilos
+         </template>
+         <template v-if="measurementWeight && measurementHeight">
+          and
+         </template>
+         <template v-if="measurementHeight">
+          was {{ measurementHeight }} cm tall
+         </template>
+         .
+       </p>
+
       <p> {{ parents }} </p>
+
+      <p>
+         In total, {{ pronoun }} has soiled {{ childData.totals.diapers }} diapers,
+         eaten {{ childData.totals.meals }} meals
+         and slept {{ childData.totals.sleep }} times
+       </p>
     </template>
   </div>
 </template>
@@ -28,17 +48,31 @@ export default {
     };
   },
 
+  methods: {
+    fetchData() {
+      if (this.$root.userdata.currentChild) {
+        this.loadAjax({ url: this.getUrl("child")})
+        .done( (data) => {
+          this.childData = data.child;
+        })
+      }
+    }
+  },
+
   created: function() {
-    if (this.$root.userdata.currentChild) {
-      this.loadAjax({ url: this.getUrl("child")})
-      .done( (data) => {
-        console.log(data);
-        this.childData = data.child;
-      })
+    this.fetchData();
+  },
+
+  watch: {
+    childId: function() {
+      this.fetchData();
     }
   },
 
   computed: {
+    childId: function() {
+      return this.$root.userdata.currentChild.id;
+    },
     ageSeconds: function() {
       return (moment() - moment(this.childData.birthday))/1000;
     },
@@ -78,6 +112,19 @@ export default {
     },
     ageWeeks: function() {
       return Math.floor(this.ageDays / 7);
+    },
+    measurementTime: function() {
+      return moment(this.childData.last_measurement.dt).fromNow();
+    },
+    measurementWeight: function() {
+      return this.childData.last_measurement.weight;
+    },
+    measurementHeight: function() {
+      return this.childData.last_measurement.height;
+    },
+    measurementValid: function() {
+      return this.childData.last_measurement.dt &&
+        (this.childData.last_measurement.weight || this.childData.last_measurement.height);
     }
   },
 };

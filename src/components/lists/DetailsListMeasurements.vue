@@ -13,10 +13,10 @@
         {{ helpers.localtime(row.item.time) }}
       </template>
       <template v-slot:cell(height)="row">
-        {{ row.item.height }}
+        {{ row.item.height }} {{ row.item.height ? "cm" : "" }}
       </template>
       <template v-slot:cell(weight)="row">
-        {{ row.item.weight }}
+        {{ row.item.weight }} {{ row.item.weight ? "kg" : ""}}
       </template>
       <template v-slot:cell(comment)="row">
         {{ row.item.comment }}

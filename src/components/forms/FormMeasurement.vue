@@ -18,13 +18,13 @@
         </b-col>
         <b-col md=2>
           <b-form-group>
-            <small id="heightHelpId" class="text-muted">Height</small>
+            <small id="heightHelpId" class="text-muted">Height (cm)</small>
             <b-form-input v-model="height" aria-describedby="heightHelpId" />
           </b-form-group>
         </b-col>
         <b-col md=2>
           <b-form-group>
-            <small id="weightHelpId" class="text-muted">Weight</small>
+            <small id="weightHelpId" class="text-muted">Weight (kg)</small>
             <b-form-input v-model="weight" aria-describedby="weightHelpId" />
           </b-form-group>
         </b-col>

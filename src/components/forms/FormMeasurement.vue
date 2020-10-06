@@ -59,8 +59,8 @@ export default {
         return {
             date: moment().local().toDate(),
             time: String(moment().local().format("HH:mm")),
-            height: 0.0,
-            weight: 0.0,
+            height: "",
+            weight: "",
             comment: "",
             helpers: helpers,
         };
@@ -88,8 +88,8 @@ export default {
         .done((data) => {
           this.date = moment(data.dt).local().toDate();
           this.time = moment(data.dt).local().format("HH:mm");
-          this.height = data.height;
-          this.weight = data.weight;
+          if (data.height) this.height = data.height;
+          if (data.weight) this.weight = data.weight;
           this.comment = data.comment;
         });
       }
@@ -97,20 +97,24 @@ export default {
 
     methods: {
         doSubmit() {
-          this.loadAjax({
-              type: "post",
-              url: this.id
-                   ? this.getUrl("measurements_edit", this.id)
-                   : this.getUrl("measurements_add"),
-              data: {
-                  'dt': helpers.getTimestamp(this.date, this.time),
-                  'height': this.height,
-                  'weight': this.weight,
-                  'comment': this.comment,
-              },
-          }).done( ()=> {
-              this.$emit("updated");
-          });
+          if (this.height || this.weight) {
+            this.loadAjax({
+                type: "post",
+                url: this.id
+                    ? this.getUrl("measurements_edit", this.id)
+                    : this.getUrl("measurements_add"),
+                data: {
+                    'dt': helpers.getTimestamp(this.date, this.time),
+                    'height': this.height,
+                    'weight': this.weight,
+                    'comment': this.comment,
+                },
+            }).done( ()=> {
+                this.$emit("updated");
+            });
+          } else {
+            this.popupError("Height or weight required.");
+          }
         },
         doDelete() {
           this.loadAjax({

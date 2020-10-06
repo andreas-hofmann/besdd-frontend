@@ -97,6 +97,12 @@ export default {
 
     methods: {
         doSubmit() {
+          this.height = parseFloat(String(this.height).replace(",", "."));
+          this.weight = parseFloat(String(this.weight).replace(",", "."));
+
+          if (!this.height) this.height = "";
+          if (!this.weight) this.weight = "";
+
           if (this.height || this.weight) {
             this.loadAjax({
                 type: "post",
